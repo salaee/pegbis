@@ -1,4 +1,3 @@
-from osgeo import gdal
 from scipy import ndimage
 import matplotlib.pyplot as plt
 from filter import *
@@ -102,7 +101,6 @@ if __name__ == "__main__":
     input_path = "data/paris.jpg"
 
     # Loading the image
-    src_ds = gdal.Open(input_path)
     input_image = ndimage.imread(input_path, flatten=False, mode=None)
     print("Loading is done.")
     print("processing...")
