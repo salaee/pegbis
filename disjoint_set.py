@@ -30,9 +30,11 @@ class universe:
         if self.elts[x, 0] > self.elts[y, 0]:
             self.elts[y, 2] = x
             self.elts[x, 1] += self.elts[y, 1]
+            self.elts[y, 1] = self.elts[x, 1]
         else:
             self.elts[x, 2] = y
             self.elts[y, 1] += self.elts[x, 1]
+            self.elts[x, 1] = self.elts[y, 1]
             if self.elts[x, 0] == self.elts[y, 0]:
                 self.elts[y, 0] += 1
         self.num -= 1
