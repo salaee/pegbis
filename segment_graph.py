@@ -35,10 +35,12 @@ def segment_graph(num_vertices, num_edges, edges, c):
         a = u.find(pedge[0])
         b = u.find(pedge[1])
         if a != b:
-            if (pedge[2] <= threshold[a]) and (pedge[2] <= threshold[b]):
+            if pedge[2] <= min(threshold[a], threshold[b]):
                 u.join(a, b)
                 a = u.find(a)
+                b = u.find(b)
                 threshold[a] = pedge[2] + get_threshold(u.size(a), c)
+                threshold[b] = threshold[a]
 
     return u
 

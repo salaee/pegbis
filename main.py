@@ -1,4 +1,4 @@
-from scipy import ndimage
+from skimage import io
 import matplotlib.pyplot as plt
 from filter import *
 from segment_graph import *
@@ -44,7 +44,7 @@ def segment(in_image, sigma, k, min_size):
                 edges[num, 2] = diff(smooth_red_band, smooth_green_band, smooth_blue_band, x, y, x, y + 1)
                 num += 1
 
-            if (x < width - 1) and (y < height - 2):
+            if (x < width - 1) and (y < height - 1):
                 edges[num, 0] = int(y * width + x)
                 edges[num, 1] = int((y + 1) * width + (x + 1))
                 edges[num, 2] = diff(smooth_red_band, smooth_green_band, smooth_blue_band, x, y, x + 1, y + 1)
@@ -89,6 +89,7 @@ def segment(in_image, sigma, k, min_size):
     plt.imshow(in_image)
     a.set_title('Original Image')
     a = fig.add_subplot(1, 2, 2)
+    output = output.astype(int)
     plt.imshow(output)
     a.set_title('Segmented Image')
     plt.show()
@@ -101,7 +102,7 @@ if __name__ == "__main__":
     input_path = "data/paris.jpg"
 
     # Loading the image
-    input_image = ndimage.imread(input_path, flatten=False, mode=None)
+    input_image = io.imread(input_path)
     print("Loading is done.")
     print("processing...")
     segment(input_image, sigma, k, min)
